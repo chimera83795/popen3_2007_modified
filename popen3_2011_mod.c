@@ -102,7 +102,7 @@ pid_t popen3(int *writefd, int *readfd, int *errfd)
 				}
 				close(err_pipe[1]);
 			}
-			execl("/bin/sh", "/bin/sh", (char *)NULL);
+			execl("/bin/sh", "/bin/sh", (char *)NULL); //example shell
 			perror("Error executing command in child process");
 			exit(-1);
 
@@ -154,6 +154,7 @@ error:
 
 int main()
 {
+	//small poc
 	char buffer[4096];
 	char cmd[10] = "id\n";
 	int input, output, error;
@@ -161,17 +162,11 @@ int main()
 		printf("error while popen3\n");
 	}
 	printf("[*]created popen3 descriptors\n");
-
 	memset(&buffer, 0, sizeof(buffer));
 	printf("cmd:%s\n", cmd);
-	printf("bytes_writen: %d\n", write(input, &cmd, sizeof(cmd)));
-	printf("bufbefore: %s\n", &buffer);
-	printf("bytes_read: %d\n",read(output, &buffer, sizeof(buffer))); // stuck 
-	printf("bufafter: %s\n", &buffer);
+	printf("bytes_writen_to_stdin: %d\n", write(input, &cmd, sizeof(cmd)));
+	printf("bytes_read_from_stdout: %d\n",read(output, &buffer, sizeof(buffer)));
+	printf("output: %s\n", &buffer);
 
 	return 0;
 }
-
-//for getcwd use pwd / cd on win
-
-///funktiieoekf
