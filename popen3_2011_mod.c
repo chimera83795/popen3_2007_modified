@@ -22,7 +22,6 @@
 
 #include <stdlib.h>
 #include <string.h>
-#include <strings.h>
 
 /*
  * Sets the FD_CLOEXEC flag.  Returns 0 on success, -1 on error.
